@@ -8,6 +8,6 @@ Users are able to:
 * [ ] Create, delete, edit and view all quotes
 * [ ] View a list of all quotes sorted by date
 
-Users can't:
+U+274C Users are unable to:
 * [ ] Delete or edit other users account
 * [ ] Delete or edit other users posts
