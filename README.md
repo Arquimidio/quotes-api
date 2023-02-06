@@ -2,7 +2,7 @@
 
 Restful API that enables users to share their toughts posting quotes. Other users are able to view those quotes and to leave a like.
 
-Users are able to:
+&#9989; Users are able to:
 
 * [ ] Create, delete, edit and view their own account
 * [ ] Create, delete, edit and view all quotes
