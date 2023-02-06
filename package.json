@@ -1,0 +1,28 @@
+{
+  "name": "quotes-api",
+  "version": "1.0.0",
+  "description": "Restful API that enables users to share their toughts posting quotes. Other users are able to view those quotes and to leave a like.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arquimidio/quotes-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arquimidio/quotes-api/issues"
+  },
+  "homepage": "https://github.com/Arquimidio/quotes-api#readme",
+  "devDependencies": {
+    "jest": "^29.4.1",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.4"
+  }
+}
