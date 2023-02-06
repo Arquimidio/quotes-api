@@ -7,6 +7,7 @@ Restful API that enables users to share their toughts posting quotes. Other user
 * [ ] Create, delete, edit and view their own account
 * [ ] Create, delete, edit and view all quotes
 * [ ] View a list of all quotes sorted by date
+* [ ] Like other users posts
 
 &#10060; Users are unable to:
 * [ ] Delete or edit other users account
