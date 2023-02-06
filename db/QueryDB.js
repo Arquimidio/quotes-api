@@ -1,6 +1,6 @@
 const DB = require('./DBAccess');
 
-moodule.exports = class QueryDB {
+module.exports = class QueryDB {
     static getQuotes() {
         return DB.all(
             `SELECT *
@@ -17,7 +17,7 @@ moodule.exports = class QueryDB {
 
     static postUser(user) {
         return DB.run(
-            `INSERT INTO users (name, login, password),
+            `INSERT INTO users (name, login, password)
             VALUES('${user.name}', '${user.login}', '${user.password}')`
         )
     }
