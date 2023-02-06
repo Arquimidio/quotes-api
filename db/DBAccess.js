@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 const path = require('path');
-const dbPath = path.join(__dirname, 'quotesApp');
+const dbPath = path.join(__dirname, 'quotesAppDb');
 const dbExists = fs.existsSync(dbPath);
 const database = new sqlite3.Database(dbPath);
 const SchemaQueries = require('./SchemaQueries');
