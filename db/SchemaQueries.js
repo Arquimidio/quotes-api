@@ -10,7 +10,8 @@ USER {
 QUOTES {
     quoteId,
     authorId,
-    quote
+    quote,
+    date
 }
 
 LIKEs {
@@ -32,6 +33,7 @@ module.exports = [
         "id" INTEGER PRIMARY KEY UNIQUE,
         "authorId" INTEGER,
         "quote" INTEGER,
+        "date" TEXT,
         FOREIGN KEY (authorId) REFERENCES users(id)
     )`,
 

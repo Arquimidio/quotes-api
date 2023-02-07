@@ -5,16 +5,22 @@ module.exports = class QueryDB {
     static getQuotes() {
         return DB.all(
             `SELECT *
-            FROM quotes`
+            FROM quotes
+            ORDER BY date ASC`
         )
     }
 
     static postQuote(newQuote) {
         return DB.run(
-            `INSERT INTO quotes (authorId, quote)
-            VALUES('${newQuote.authorId}', '${newQuote.quote}')`
+            `INSERT INTO quotes (authorId, quote, date)
+            VALUES(
+                '${newQuote.authorId}', 
+                '${newQuote.quote}',
+                '${new Date().toISOString().split('T')[0]}'
+            )`
         )
     }
+
 
     static getUser(userId) {
         return DB.get(
