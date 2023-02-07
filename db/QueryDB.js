@@ -15,6 +15,14 @@ module.exports = class QueryDB {
         )
     }
 
+    static getUser(userId) {
+        return DB.get(
+            `SELECT *
+            FROM users
+            WHERE id = '${userId}'`
+        )
+    }
+
     static async postUser(user) {
         await DB.run(
             `INSERT INTO users (name, login, password)
