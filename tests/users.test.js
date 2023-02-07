@@ -22,7 +22,7 @@ describe("User CRUD operations work", () => {
             .expect(200)
     })
 
-    test("Should return new user object with a 200 status code", async () => {
+    test("Should post new user with a 200 status code", async () => {
         await requestTest
             .post('/user')
             .send({
@@ -32,5 +32,11 @@ describe("User CRUD operations work", () => {
             })
             .expect(201)
             .then(res => expect('id' in JSON.parse(res.text)).toBe(true));
+    })
+
+    test("Should delete user with a 204 status code", async () => {
+        await requestTest
+            .delete(`/user/${newUserId.id}`)
+            .expect(204)
     })
 })

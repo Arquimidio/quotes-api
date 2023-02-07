@@ -22,7 +22,19 @@ const getUser = async (req, res) => {
     }
 }
 
+const deleteUser = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        await QueryDB.deleteUser(userId);
+        res.status(204).end();
+    } catch(error) {
+        console.log(error);
+        res.status(404).end();
+    }
+}
+
 module.exports = {
     getUser,
-    postUser
+    postUser,
+    deleteUser
 }

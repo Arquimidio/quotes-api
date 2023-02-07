@@ -38,7 +38,7 @@ module.exports = class QueryDB {
     static deleteUser(userId) {
         return DB.run(
             `DELETE from users
-            WHERE userId = '${userId}'`
+            WHERE id = '${userId}'`
         )
     }
 }
