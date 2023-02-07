@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 const requestTest = request(app);
 const basicQuote = {
-  authorId: 1,
+  authorId: 2,
   quote: "Machines take me by surprise with great frequency"
 }
 let newQuoteId;

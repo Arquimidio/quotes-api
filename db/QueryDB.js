@@ -12,8 +12,12 @@ module.exports = class QueryDB {
 
     static getQuotes() {
         return DB.all(
-            `SELECT *
+            `SELECT 
+                quotes.quote, 
+                COUNT(likes.likeAuthorId) as likes
             FROM quotes
+            LEFT JOIN likes
+            GROUP BY quotes.id
             ORDER BY date ASC`
         )
     }

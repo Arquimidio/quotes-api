@@ -33,14 +33,11 @@ module.exports = [
         "id" INTEGER PRIMARY KEY UNIQUE,
         "authorId" INTEGER,
         "quote" INTEGER,
-        "date" TEXT,
-        FOREIGN KEY (authorId) REFERENCES users(id)
+        "date" TEXT
     )`,
 
     `CREATE TABLE "likes" (
         "quoteId" INTEGER,
-        "likeAuthorId" INTEGER,
-        FOREIGN KEY (quoteId) REFERENCES quotes(id),
-        FOREIGN KEY (likeAuthorId) REFERENCES users(id)
+        "likeAuthorId" INTEGER
     )`
 ]
