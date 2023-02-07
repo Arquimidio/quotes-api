@@ -1,16 +1,17 @@
 const request = require('supertest');
 const app = require('../app');
 const requestTest = request(app);
+const basicUser ={
+    "name": "Or",
+    "login": "Di",
+    "password": "Nary"
+} 
 let newUserId;
 
 beforeAll(async () => {
     await requestTest
         .post('/user')
-        .send({
-            "name": "Or",
-            "login": "Di",
-            "password": "Nary"
-        })
+        .send(basicUser)
         .expect(201)
         .then(res => newUserId = JSON.parse(res.text))
 })
@@ -32,6 +33,15 @@ describe("User CRUD operations work", () => {
             })
             .expect(201)
             .then(res => expect('id' in JSON.parse(res.text)).toBe(true));
+    })
+
+    test("Should update user with a 200 status code", async () => {
+        const updatedUser = {...basicUser, name: "iWasUpdated"};
+
+        await requestTest
+            .put(`/user/${newUserId.id}`)
+            .send(updatedUser)
+            .expect(200)
     })
 
     test("Should delete user with a 204 status code", async () => {

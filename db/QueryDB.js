@@ -1,4 +1,5 @@
 const DB = require('./DBAccess');
+const { objToUpdateVals } = require('./helpers');
 
 module.exports = class QueryDB {
     static getQuotes() {
@@ -33,6 +34,16 @@ module.exports = class QueryDB {
             `SELECT MAX(id) as id
             FROM users`
         )
+    }
+
+    static async updateUser(userId, updatedUser) {
+        await DB.run(
+            `UPDATE users
+            SET ${objToUpdateVals(updatedUser)}
+            WHERE id = ${userId};`
+        )
+
+        return this.getUser();
     }
 
     static deleteUser(userId) {

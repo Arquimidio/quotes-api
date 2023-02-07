@@ -1,5 +1,16 @@
 const QueryDB = require('../db/QueryDB');
 
+const getUser = async (req, res) => {
+    const { userId } = req.params;
+    try{
+        const user = await QueryDB.getUser(userId);
+        res.status(200).json(user);
+    } catch(error) {
+        console.log(error);
+        res.status(404).end();
+    }
+}
+
 const postUser = async (req, res) => {
     const { body: user } = req;
     try {
@@ -11,11 +22,13 @@ const postUser = async (req, res) => {
     }
 }
 
-const getUser = async (req, res) => {
+const updateUser = async (req, res) => {
+    const { body: newUser } = req;
     const { userId } = req.params;
-    try{
-        const user = await QueryDB.getUser(userId);
-        res.status(200).json(user);
+
+    try {
+        const updatedUser = await QueryDB.updateUser(userId, newUser);
+        res.status(200).json(updatedUser);
     } catch(error) {
         console.log(error);
         res.status(404).end();
@@ -36,5 +49,6 @@ const deleteUser = async (req, res) => {
 module.exports = {
     getUser,
     postUser,
+    updateUser,
     deleteUser
 }
