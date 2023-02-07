@@ -1,10 +1,11 @@
 const QueryDB = require('../db/QueryDB');
 
 const postUser = async (req, res) => {
-    const { user } = req.body;
+    const { body: user } = req;
     try {
-        await QueryDB.postUser(user);
-        res.status(200).json()
+        const data = await QueryDB.postUser(user);
+        console.log(data);
+        res.status(200).json({ success: true })
     } catch(error) {
         console.log(error);
         res.status(403).end();

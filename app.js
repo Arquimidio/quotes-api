@@ -5,6 +5,6 @@ const userRoutes = require('./routes/user');
 
 app.use(express.json());
 app.use('/user', userRoutes);
-app.listen(PORT, () => console.log(`Listening at ${PORT}`));
+// app.listen(PORT, () => console.log(`Listening at ${PORT}`));
 
 module.exports = app;

@@ -21,4 +21,11 @@ module.exports = class QueryDB {
             VALUES('${user.name}', '${user.login}', '${user.password}')`
         )
     }
+
+    static deleteUser(userId) {
+        return DB.run(
+            `DELETE from users
+            WHERE userId = '${userId}'`
+        )
+    }
 }
