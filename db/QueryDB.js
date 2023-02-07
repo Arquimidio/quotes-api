@@ -15,10 +15,15 @@ module.exports = class QueryDB {
         )
     }
 
-    static postUser(user) {
-        return DB.run(
+    static async postUser(user) {
+        await DB.run(
             `INSERT INTO users (name, login, password)
             VALUES('${user.name}', '${user.login}', '${user.password}')`
+        )
+
+        return DB.get(
+            `SELECT MAX(id) as id
+            FROM users`
         )
     }
 

@@ -12,6 +12,6 @@ describe("User CRUD operations work", () => {
                 "password": "I love oaktrees"
             })
             .expect(200)
-            .expect({ success: true })
+            .then(res => expect('id' in JSON.parse(res.text)).toBe(true));
     })
 })
