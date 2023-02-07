@@ -5,12 +5,14 @@ const basicQuote = {
   authorId: 1,
   quote: "Machines take me by surprise with great frequency"
 }
+let newQuoteId;
 
 beforeAll(async () => {
-  await requestTest
+  const response = await requestTest
     .post('/quotes')
     .send(basicQuote)
     .expect(201)
+  newQuoteId = JSON.parse(response.text).id;
 })
 
 describe("CRUD operations are successful", () => {
@@ -18,5 +20,18 @@ describe("CRUD operations are successful", () => {
     await requestTest
       .get('/quotes')
       .expect(200)
+  })
+
+  test("Updates quote with status 204", async () => {
+    await requestTest
+      .put(`/quotes/${newQuoteId}`)
+      .send({ quote: 'This quote has been updated :)'})
+      .expect(204)
+  })
+
+  test("Deletes a quote with status 204", async () => {
+    await requestTest
+      .delete(`/quotes/${newQuoteId}`)
+      .expect(204)
   })
 })

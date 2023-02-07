@@ -2,6 +2,14 @@ const DB = require('./DBAccess');
 const { objToUpdateVals } = require('./helpers');
 
 module.exports = class QueryDB {
+    static getQuote(quoteId) {
+        return DB.get(
+            `SELECT *
+            FROM quotes
+            WHERE id = '${quoteId}'`
+        )
+    }
+
     static getQuotes() {
         return DB.all(
             `SELECT *
@@ -10,8 +18,8 @@ module.exports = class QueryDB {
         )
     }
 
-    static postQuote(newQuote) {
-        return DB.run(
+    static async postQuote(newQuote) {
+        await DB.run(
             `INSERT INTO quotes (authorId, quote, date)
             VALUES(
                 '${newQuote.authorId}', 
@@ -19,6 +27,28 @@ module.exports = class QueryDB {
                 '${new Date().toISOString().split('T')[0]}'
             )`
         )
+
+        return DB.get(
+            `SELECT MAX(id) as id
+            FROM quotes`
+        )
+    }
+
+    static async updateQuote(quoteId, updatedQuote) {
+        await DB.run(
+            `UPDATE quotes
+            SET quote = '${updatedQuote}'
+            WHERE id = ${quoteId};`
+        )
+
+        return this.getQuote(quoteId);
+    }
+
+    static deleteQuote(quoteId) {
+        return DB.run(
+            `DELETE from quotes
+            WHERE id = '${quoteId}'`
+        )  
     }
 
 
@@ -49,7 +79,7 @@ module.exports = class QueryDB {
             WHERE id = ${userId};`
         )
 
-        return this.getUser();
+        return this.getUser(userId);
     }
 
     static deleteUser(userId) {

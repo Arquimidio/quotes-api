@@ -13,8 +13,32 @@ const getQuotes = async (req, res) => {
 const postQuote = async (req, res) => {
   const { body: newQuote } = req;
   try {
-    await QueryDB.postQuote(newQuote);
-    res.status(201).end();
+    const id = await QueryDB.postQuote(newQuote);
+    res.status(201).json(id);
+  } catch(error) {
+    console.log(error);
+    res.status(403).json({ error: 'unauthorized' })
+  }
+}
+
+const updateQuote = async (req, res) => {
+  const { quoteId } = req.params;
+  const { quote } = req.body;
+  
+  try {
+    const updatedQuote = await QueryDB.updateQuote(quoteId, quote);
+    res.status(204).json(updatedQuote);
+  } catch(error) {
+    console.log(error);
+    res.status(403).json({ error: 'unauthorized' })
+  }
+}
+
+const deleteQuote = async (req, res) => {
+  const { quoteId } = req.params;
+  try {
+    await QueryDB.deleteQuote(quoteId);
+    res.status(204).end();
   } catch(error) {
     console.log(error);
     res.status(403).json({ error: 'unauthorized' })
@@ -23,5 +47,7 @@ const postQuote = async (req, res) => {
 
 module.exports = {
   getQuotes,
-  postQuote
+  postQuote,
+  updateQuote,
+  deleteQuote
 }
