@@ -25,7 +25,7 @@ module.exports = [
     `CREATE TABLE "users" (
         "id" INTEGER PRIMARY KEY UNIQUE,
         "name" TEXT,
-        "login" TEXT,
+        "login" TEXT UNIQUE,
         "password" TEXT
     )`,
 
