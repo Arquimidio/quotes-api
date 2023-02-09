@@ -46,9 +46,14 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    const { name, login , password } = req;
+}
+
 module.exports = {
     getUser,
     postUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 }
