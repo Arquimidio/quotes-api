@@ -13,7 +13,7 @@ module.exports = class QueryDB {
     static getQuotes() {
         return DB.all(
             `SELECT 
-                quotes.quote, 
+                quotes.*, 
                 COUNT(likes.likeAuthorId) as likes
             FROM quotes
             LEFT JOIN likes
@@ -55,6 +55,32 @@ module.exports = class QueryDB {
         )  
     }
 
+    static async likeQuote(userId, quoteId) {
+        const isAlreadyLiked = async () => {
+            const foundLike = await DB.get(
+                `SELECT *
+                FROM likes
+                WHERE likeAuthorId = '${userId}' AND quoteId = '${quoteId}'`
+            )
+
+            return !!foundLike;
+        }
+
+        if(await isAlreadyLiked()) {
+            await DB.run(
+                `DELETE from likes
+                WHERE likeAuthorId = '${userId}' AND quoteId = '${quoteId}'`
+            )
+        } else {
+            
+           await DB.run(
+                `INSERT INTO likes (likeAuthorId, quoteId)
+                VALUES('${userId}', '${quoteId}')`
+           ) 
+        }
+
+        return DB.get(`SELECT COUNT(quoteId) as likes FROM likes WHERE quoteId = '${quoteId}'`);
+    }
 
     static getUser(userId) {
         return DB.get(

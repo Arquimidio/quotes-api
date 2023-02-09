@@ -10,4 +10,6 @@ router.route('/:quoteId')
   .put(quotesControllers.updateQuote)
   .delete(quotesControllers.deleteQuote)
 
+router.post('/:quoteId/like', quotesControllers.likeQuote);
+
 module.exports = router;

@@ -45,9 +45,24 @@ const deleteQuote = async (req, res) => {
   }
 }
 
+const likeQuote = async (req, res) => {
+  const { quoteId } = req.params;
+  const { userId } = req.body;
+
+  try {
+    const likeCount = await QueryDB.likeQuote(userId, quoteId);
+    console.log(likeCount);
+    res.status(204).json({ likes: likeCount });
+  } catch(error) {
+    console.log(error);
+    res.status(403).json({ error: 'unauthorized' })
+  }
+}
+
 module.exports = {
   getQuotes,
   postQuote,
   updateQuote,
-  deleteQuote
+  deleteQuote,
+  likeQuote
 }

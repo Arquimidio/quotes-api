@@ -4,7 +4,7 @@ const getUser = async (req, res) => {
     const { userId } = req.params;
     try{
         const user = await QueryDB.getUser(userId);
-        res.status(200).json(user);
+        res.status(200).json(user || null);
     } catch(error) {
         console.log(error);
         res.status(404).end();
