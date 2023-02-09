@@ -51,8 +51,7 @@ const likeQuote = async (req, res) => {
 
   try {
     const likeCount = await QueryDB.likeQuote(userId, quoteId);
-    console.log(likeCount);
-    res.status(204).json({ likes: likeCount });
+    res.status(200).json(likeCount);
   } catch(error) {
     console.log(error);
     res.status(403).json({ error: 'unauthorized' })
